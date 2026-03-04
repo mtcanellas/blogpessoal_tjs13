@@ -14,14 +14,23 @@ export class PostagemService{
 
     async findAll(): Promise<Postagem[]>{
         //SELECT * FROM  tb_postagens
-        return this.postagemRepository.find();
+        return this.postagemRepository.find({
+            relations:{
+                tema:true
+            }
+        });
     }
 
     async findById(id: number) : Promise<Postagem>{
         // SELECT * FROM tb_postagens WHERE id = ?;
         const postagem = await this.postagemRepository.findOne({
             where:{
-                    id}
+                    id},
+            
+            relations:{
+                tema:true
+            }
+            
     })
 
     if(!postagem) 
@@ -35,6 +44,9 @@ export class PostagemService{
         return this.postagemRepository.find({
             where:{
                 titulo: ILike(`%${titulo}%`) //Iike (ignora maiusculo e minusculo )
+            },
+            relations:{
+                tema:true
             }
     })
     }
