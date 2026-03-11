@@ -4,6 +4,9 @@ import { PostagemModule } from './postagem/postagem.module';
 import { Postagem } from './postagem/entities/postagem.entity';
 import { Tema } from './tema/entities/tema.entity';
 import { TemaModule } from './tema/tema.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { AuthModule } from './auth/auth.module';
+import { Usuario } from './usuario/entities/usuario.entity';
 
 
 @Module({
@@ -15,14 +18,18 @@ import { TemaModule } from './tema/tema.module';
       username: 'root',
       password: 'root',
       database: 'db_blogpessoal',
-      entities: [Postagem , Tema],
+      entities: [Postagem , Tema , Usuario],
+      
+      //Para sincronizar as function, em produção deixamos a opção em false
       synchronize: true,
       logging: true,
 
     }),
 
     PostagemModule , 
-    TemaModule
+    TemaModule,
+    AuthModule,
+    UsuarioModule
 
   ],
   controllers: [],
